@@ -1,115 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Sequence Alert</title>
+    <title>Chika sa Ex</title>
     <style>
-        /* Modern Dark Theme */
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #0f0f0f; /* Deep Black Background */
-            color: white;
+            background-color: #050505;
+            color: #fff;
+            overflow: hidden;
         }
 
-        /* Responsive Overlay */
         .overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.98);
             display: none; 
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(8px);
             z-index: 1000;
-            padding: 20px; /* Space for mobile screens */
-            box-sizing: border-box;
+            padding: 20px;
         }
 
-        /* The Alert Card */
         .alert-card {
-            background: #1a1a1a;
+            background: #111;
             border: 1px solid #333;
-            padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            padding: 35px 20px;
+            border-radius: 20px;
             text-align: center;
             width: 100%;
-            max-width: 400px; /* Responsive limit */
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+            max-width: 360px;
+            box-shadow: 0 10px 40px rgba(0,0,0,1);
+            animation: pop 0.3s ease-out;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .overlay.active { display: flex; }
-        .overlay.active .alert-card { 
-            transform: translateY(0); 
-            opacity: 1; 
+
+        .alert-icon { font-size: 50px; margin-bottom: 15px; display: block; }
+        h2 { margin: 0 0 10px; color: #ff0050; font-size: 1.4rem; } 
+        p { color: #aaa; line-height: 1.5; margin-bottom: 25px; font-size: 1rem; }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .alert-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        h2 { margin: 0 0 10px; font-size: 1.5rem; color: #fff; }
-        p { color: #aaa; line-height: 1.6; margin-bottom: 30px; font-size: 1.1rem; }
-
-        /* The "Nice" Button */
         .next-btn {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            background: #ff0050; /* TikTok/Alert Red-Pink */
             color: white;
             border: none;
-            padding: 14px 40px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: bold;
             cursor: pointer;
-            width: 100%; /* Full width on mobile */
-            transition: transform 0.2s, filter 0.2s;
+            width: 100%;
         }
 
-        .next-btn:active { transform: scale(0.96); }
-
-        .trigger-btn {
-            padding: 15px 30px;
-            background: #222;
-            color: #eee;
-            border: 1px solid #444;
-            border-radius: 12px;
+        .choice-btn {
+            background: transparent;
+            color: #ff4d4d;
+            border: 1px solid #ff4d4d;
+            padding: 12px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
+        }
+
+        .trigger-btn {
+            padding: 20px 40px;
+            background: white;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            font-weight: 900;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
         }
     </style>
 </head>
 <body>
 
-    <button class="trigger-btn" onclick="startSequence()">Start Messages</button>
+    <button class="trigger-btn" onclick="startSequence()">HOY! MAY CHIKA AKO SA EX MO...</button>
 
     <div class="overlay" id="alertOverlay">
         <div class="alert-card">
-            <span class="alert-icon" id="alertIcon">✨</span>
-            <h2 id="alertTitle">Welcome</h2>
-            <p id="alertMessage">This is the first message.</p>
-            <button class="next-btn" id="actionBtn" onclick="nextStep()">Continue</button>
+            <span class="alert-icon" id="alertIcon">🤫</span>
+            <h2 id="alertTitle">Uy, naniwala agad...</h2>
+            <p id="alertMessage">Bakit? Akala mo ba may gusto siyang sabihin sa'yo? Wala na 'yun, bes. Move on na tayo.</p>
+            <div id="buttonArea" class="btn-container">
+                <button class="next-btn" id="actionBtn" onclick="nextStep()">Sige na nga, saktan mo pa ako.</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Define your sequence of messages here
         const steps = [
-            { title: "Hello!", msg: "Welcome to your new sequence alert.", icon: "👋" },
-            { title: "Step 2", msg: "This design is fully responsive and dark-themed.", icon: "📱" },
-            { title: "Step 3", msg: "You can add as many messages as you want!", icon: "🚀" },
-            { title: "Almost Done", msg: "The background is sleek black, as requested.", icon: "🌑" },
-            { title: "Finished!", msg: "Clicking 'Close' will exit the alert now.", icon: "✅" }
+            { title: "Seen 2024", msg: "Kamusta yung Messenger niyo? In-archive mo na ba o araw-araw mo pa ring tinitingnan kung 'Active Now' siya kahit alam mong hindi ka naman ichachat?", icon: "🔵" },
+            { title: "React Queen/King", msg: "Huwag ka nang umasa sa 'Care' react niya sa post mo. Minsan, typo lang 'yun o sadyang nang-aasar lang siya.", icon: "😮‍💨" },
+            { title: "Ang Unsent Chat", msg: "Yung itatype mo sana na 'Miss na kita' pero sa Notes mo na lang sinave kasi alam mong maba-block ka lang pag sinend mo.", icon: "📝" },
+            { title: "New Life, Who U?", msg: "Nakita mo ba yung MyDay niya? Hindi naman ikaw yung kasama, 'di ba? Pero bakit parang ikaw yung nahihirapang huminga?", icon: "💔" },
+            { title: "Messenger Ghost", msg: "Yung dating 'Good Morning' niyo, naging 'Active 5h ago' na lang na walang reply. Sakit, 'no?", icon: "👻" },
+            { title: "The Delulu Era", msg: "Huwag ka nang mag-share ng sad quotes sa FB. Hindi niya 'yun mababasa, naka-Restrict ka na sa kanya, ghorl/boy.", icon: "🤡" }
         ];
 
         let currentStep = 0;
@@ -125,29 +130,38 @@
             document.getElementById('alertTitle').innerText = data.title;
             document.getElementById('alertMessage').innerText = data.msg;
             document.getElementById('alertIcon').innerText = data.icon;
-            
-            // Change button text on the last step
-            const btn = document.getElementById('actionBtn');
-            btn.innerText = (currentStep === steps.length - 1) ? "Close" : "Continue";
+            document.getElementById('actionBtn').innerText = "Next Round ng Pananakit";
         }
 
         function nextStep() {
             currentStep++;
             if (currentStep < steps.length) {
-                // Add a small "pop" effect when content changes
-                const card = document.querySelector('.alert-card');
-                card.style.transform = "scale(0.95)";
-                
-                setTimeout(() => {
-                    updateAlertContent();
-                    card.style.transform = "scale(1)";
-                }, 100);
+                updateAlertContent();
             } else {
-                // Close the alert
-                document.getElementById('alertOverlay').classList.remove('active');
+                showFinalChoices();
             }
         }
-    </script>
 
+        function showFinalChoices() {
+            document.getElementById('alertTitle').innerText = "Last Na 'To...";
+            document.getElementById('alertMessage').innerText = "Pili ka sa dalawang katotohanan. Alin ang mas mahapdi sa puso mong marupok?";
+            document.getElementById('alertIcon').innerText = "⚖️";
+            
+            const btnArea = document.getElementById('buttonArea');
+            btnArea.innerHTML = `
+                <button class="choice-btn" onclick="finalAlert('aray')">Masakit ba?</button>
+                <button class="choice-btn" onclick="finalAlert('masaya')">Masaya na siya sa iba?</button>
+            `;
+        }
+
+        function finalAlert(choice) {
+            if(choice === 'aray') {
+                alert("Masakit talaga maging option lang. O siya, i-close mo na 'to at matulog ka na. Stop checking the profile!");
+            } else {
+                alert("Ay naku, masayang-masaya na 'yun. Habang ikaw, heto, gumagamit pa ng ganitong app para lang maalala siya. Gising na!");
+            }
+            location.reload(); 
+        }
+    </script>
 </body>
 </html>
