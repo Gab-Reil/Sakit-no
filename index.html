@@ -3,118 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chika sa Ex</title>
+    <title>Savage Truth</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial Black', Gadget, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #050505;
+            background-color: #000; /* Pure black background */
             color: #fff;
-            overflow: hidden;
+            text-align: center;
         }
 
         .overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.98);
+            background: rgba(0, 0, 0, 0.95);
             display: none; 
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            padding: 20px;
+            padding: 15px;
         }
 
         .alert-card {
-            background: #111;
-            border: 1px solid #333;
-            padding: 35px 20px;
-            border-radius: 20px;
-            text-align: center;
+            background: #1a1a1a; /* Dark gray for visibility */
+            border: 2px solid #333;
+            padding: 50px 30px;
+            border-radius: 15px;
             width: 100%;
-            max-width: 360px;
-            box-shadow: 0 10px 40px rgba(0,0,0,1);
-            animation: pop 0.3s ease-out;
-        }
-
-        @keyframes pop {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            max-width: 450px;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
         }
 
         .overlay.active { display: flex; }
 
-        .alert-icon { font-size: 50px; margin-bottom: 15px; display: block; }
-        h2 { margin: 0 0 10px; color: #ff0050; font-size: 1.4rem; } 
-        p { color: #aaa; line-height: 1.5; margin-bottom: 25px; font-size: 1rem; }
+        /* Larger and highly visible text */
+        #alertMessage { 
+            color: #ffffff; 
+            line-height: 1.4; 
+            margin-bottom: 40px; 
+            font-size: 1.8rem; /* Extra large font */
+            font-weight: bold;
+        }
 
         .btn-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
         }
 
-        .next-btn {
-            background: #ff0050; /* TikTok/Alert Red-Pink */
-            color: white;
+        .ok-btn {
+            background: #fff;
+            color: #000;
             border: none;
-            padding: 14px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .choice-btn {
-            background: transparent;
-            color: #ff4d4d;
-            border: 1px solid #ff4d4d;
-            padding: 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .trigger-btn {
-            padding: 20px 40px;
-            background: white;
-            color: black;
-            border: none;
+            padding: 20px;
             border-radius: 10px;
             font-weight: 900;
             cursor: pointer;
+            width: 100%;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .choice-btn {
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
             font-size: 1.1rem;
-            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+        }
+
+        .trigger-btn {
+            padding: 25px 50px;
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-weight: 900;
+            cursor: pointer;
+            font-size: 1.4rem;
+        }
+
+        .hint {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #555;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <button class="trigger-btn" onclick="startSequence()">HOY! MAY CHIKA AKO SA EX MO...</button>
+    <div>
+        <button class="trigger-btn" onclick="startSequence()">MAY CHIKA AKO SA EX MO</button>
+        <span class="hint">(Click mo yung button, dali)</span>
+    </div>
 
     <div class="overlay" id="alertOverlay">
         <div class="alert-card">
-            <span class="alert-icon" id="alertIcon">🤫</span>
-            <h2 id="alertTitle">Uy, naniwala agad...</h2>
-            <p id="alertMessage">Bakit? Akala mo ba may gusto siyang sabihin sa'yo? Wala na 'yun, bes. Move on na tayo.</p>
+            <p id="alertMessage">Naniwala ka naman agad? Akala mo ba may pake pa siya sa'yo? Wala na.</p>
             <div id="buttonArea" class="btn-container">
-                <button class="next-btn" id="actionBtn" onclick="nextStep()">Sige na nga, saktan mo pa ako.</button>
+                <button class="ok-btn" id="actionBtn" onclick="nextStep()">OK</button>
             </div>
         </div>
     </div>
 
     <script>
         const steps = [
-            { title: "Seen 2024", msg: "Kamusta yung Messenger niyo? In-archive mo na ba o araw-araw mo pa ring tinitingnan kung 'Active Now' siya kahit alam mong hindi ka naman ichachat?", icon: "🔵" },
-            { title: "React Queen/King", msg: "Huwag ka nang umasa sa 'Care' react niya sa post mo. Minsan, typo lang 'yun o sadyang nang-aasar lang siya.", icon: "😮‍💨" },
-            { title: "Ang Unsent Chat", msg: "Yung itatype mo sana na 'Miss na kita' pero sa Notes mo na lang sinave kasi alam mong maba-block ka lang pag sinend mo.", icon: "📝" },
-            { title: "New Life, Who U?", msg: "Nakita mo ba yung MyDay niya? Hindi naman ikaw yung kasama, 'di ba? Pero bakit parang ikaw yung nahihirapang huminga?", icon: "💔" },
-            { title: "Messenger Ghost", msg: "Yung dating 'Good Morning' niyo, naging 'Active 5h ago' na lang na walang reply. Sakit, 'no?", icon: "👻" },
-            { title: "The Delulu Era", msg: "Huwag ka nang mag-share ng sad quotes sa FB. Hindi niya 'yun mababasa, naka-Restrict ka na sa kanya, ghorl/boy.", icon: "🤡" }
+            "Sa tingin mo ba kaya hindi siya nagpaparamdam ay dahil busy siya? Hindi. Ayaw lang niya talaga sa'yo.",
+            "Yung 'Active Now' niya sa Messenger? Hindi para sa'yo 'yun. May ka-chat siyang iba na mas excited siyang kausapin.",
+            "Tigil-tigilan mo na yung pag-check ng profile niya. Isang taon na ang nakalipas pero ikaw, nakatambay pa rin sa memories niyo.",
+            "Naalala mo nung sinabi niyang 'di ka niya iiwan? Oh, nasaan siya ngayon? 'Di ba nandoon na sa bago niya?",
+            "Hindi ka na namimiss n'un. Ni hindi nga sumagi sa isip niya yung pangalan mo ngayong araw eh.",
+            "Yung mga kanta na pinapakinggan mo, 'wag mo nang i-ugnay sa kanya. Wala siyang pakialam sa nararamdaman mo.",
+            "Anong mapapala mo sa pag-stalk? Masaktan? O mapatunayan na masaya na siya habang ikaw ay lugmok pa rin?",
+            "Hindi ka niya babalikan. Tanggapin mo na yung katotohanan para hindi ka mukhang kawawa.",
+            "Huling beses na 'to. Itigil mo na yung pagiging marupok. Hindi nakakatuwa."
         ];
 
         let currentStep = 0;
@@ -126,11 +138,8 @@
         }
 
         function updateAlertContent() {
-            const data = steps[currentStep];
-            document.getElementById('alertTitle').innerText = data.title;
-            document.getElementById('alertMessage').innerText = data.msg;
-            document.getElementById('alertIcon').innerText = data.icon;
-            document.getElementById('actionBtn').innerText = "Next Round ng Pananakit";
+            document.getElementById('alertMessage').innerText = steps[currentStep];
+            document.getElementById('actionBtn').innerText = "OK";
         }
 
         function nextStep() {
@@ -143,9 +152,7 @@
         }
 
         function showFinalChoices() {
-            document.getElementById('alertTitle').innerText = "Last Na 'To...";
-            document.getElementById('alertMessage').innerText = "Pili ka sa dalawang katotohanan. Alin ang mas mahapdi sa puso mong marupok?";
-            document.getElementById('alertIcon').innerText = "⚖️";
+            document.getElementById('alertMessage').innerText = "OKAY KA LANG?";
             
             const btnArea = document.getElementById('buttonArea');
             btnArea.innerHTML = `
@@ -156,9 +163,9 @@
 
         function finalAlert(choice) {
             if(choice === 'aray') {
-                alert("Masakit talaga maging option lang. O siya, i-close mo na 'to at matulog ka na. Stop checking the profile!");
+                alert("Masakit talaga ang katotohanan. Matulog ka na, 'wag nang matigas ang ulo.");
             } else {
-                alert("Ay naku, masayang-masaya na 'yun. Habang ikaw, heto, gumagamit pa ng ganitong app para lang maalala siya. Gising na!");
+                alert("Oo, masayang-masaya na siya. Ikaw na lang ang hindi pa. Move on na, please.");
             }
             location.reload(); 
         }
